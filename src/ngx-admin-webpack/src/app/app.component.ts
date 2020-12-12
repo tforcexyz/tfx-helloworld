@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NbMenuItem } from '@nebular/theme';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular10-webpack';
+
+  title = 'Angular10 Webpack';
+
+  private menus: NbMenuItem[] = [
+    {
+      title: 'Home',
+      link: '.',
+      icon: 'home-outline',
+      home: true,
+    },
+    {
+      title: 'GROUP',
+      group: true,
+    },
+    {
+      title: 'Level 1',
+      link: '.',
+      icon: 'list',
+      children: [
+        {
+          title: 'Level 1.1',
+          link: '.',
+        },
+      ]
+    },
+  ];
 }

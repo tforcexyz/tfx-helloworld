@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const rootPath = path.resolve(__dirname);
 
@@ -26,7 +25,7 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    publicPath: '/'
+    publicPath: ''
   },
   optimization: {
     splitChunks: {
@@ -75,65 +74,24 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [
-          path.resolve(rootPath, 'src')
-        ],
         use: [
           'to-string-loader',
-          { 
-            loader: 'css-loader', 
-            options: { 
-                sourceMap: false 
-            }
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        exclude: [
-          path.resolve(rootPath, 'src')
-        ],
-        use: [
           {
-            loader: MiniCssExtractPlugin.loader
-          },
-          { 
-            loader: 'css-loader', 
-            options: { 
-                sourceMap: false 
+            loader: 'css-loader',
+            options: {
+                sourceMap: false
             }
           }
         ]
       },
       {
         test: /\.(sass|scss)$/,
-        include: [
-          path.resolve(rootPath, 'src')
-        ],
         use: [
           'to-string-loader',
-          { 
-            loader: 'css-loader', 
-            options: { 
-                sourceMap: false 
-            }
-          },
-          'sass-loader'
-        ]
-      },
-      {
-        test: /\.(sass|scss)(\?|$)/,
-        exclude: [
-          path.resolve(rootPath, 'src')
-        ],
-        use: [
           {
-            loader: MiniCssExtractPlugin.loader
-          },
-          { 
-            loader: 'css-loader', 
-            options: { 
-                sourceMap: false 
+            loader: 'css-loader',
+            options: {
+                sourceMap: false
             }
           },
           'sass-loader'
@@ -142,8 +100,7 @@ module.exports = {
       {
         test: /\.svg$/,
         include: [
-          path.resolve(rootPath, 'src'),
-          path.resolve(rootPath, 'static')
+          path.resolve(rootPath, 'src')
         ],
         exclude: [
         ],
@@ -186,9 +143,6 @@ module.exports = {
         minifyURLs: true,
       },
       inject: true,
-    }),
-    new MiniCssExtractPlugin({
-      filename: "index.css"
     })
   ]
 }
